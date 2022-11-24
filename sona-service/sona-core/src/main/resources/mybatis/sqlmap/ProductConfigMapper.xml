@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.bixin.sona.server.room.mapper.ProductConfigMapper">
+
+    <resultMap id="BaseResultMap" type="cn.bixin.sona.server.room.domain.db.ProductConfig">
+        <result column="id" property="id"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="product_code" property="productCode"/>
+        <result column="im_module" property="imModule"/>
+        <result column="im_send_type" property="imSendType"/>
+        <result column="stream_supplier" property="streamSupplier"/>
+        <result column="type" property="type"/>
+        <result column="push_mode" property="pushMode"/>
+        <result column="pull_mode" property="pullMode"/>
+        <result column="enter_notify_switch" property="enterNotifySwitch"/>
+        <result column="check_admin" property="checkAdmin"/>
+        <result column="need_replay" property="needReplay"/>
+        <result column="client_type" property="clientType"/>
+        <result column="bitrate" property="bitrate"/>
+        <result column="short_code" property="shortCode"/>
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+                id,
+                create_time,
+                update_time,
+                product_code,
+                im_module,
+                stream_supplier,
+                type,
+                push_mode,
+                pull_mode,
+                im_send_type,
+                enter_notify_switch,
+                check_admin,
+                need_replay,
+                client_type,
+                bitrate,
+                short_code
+    </sql>
+
+    <select id="findByProductCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_product_config
+        WHERE product_code = #{productCode}
+    </select>
+
+    <select id="findByShortCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_product_config
+        WHERE short_code = #{shortCode}
+    </select>
+
+    <insert id="insertSelective" parameterType="cn.bixin.sona.server.room.domain.db.ProductConfig" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into t_product_config
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="productCode != null" >
+                product_code,
+            </if>
+            <if test="imModule != null" >
+                im_module,
+            </if>
+            <if test="imSendType != null" >
+                im_send_type,
+            </if>
+            <if test="streamSupplier != null" >
+                stream_supplier,
+            </if>
+            <if test="type != null" >
+                type,
+            </if>
+            <if test="pushMode != null" >
+                push_mode,
+            </if>
+            <if test="pullMode != null" >
+                pull_mode,
+            </if>
+            <if test="enterNotifySwitch != null" >
+                enter_notify_switch,
+            </if>
+            <if test="checkAdmin != null" >
+                check_admin,
+            </if>
+            <if test="needReplay != null" >
+                need_replay,
+            </if>
+            <if test="clientType != null" >
+                client_type,
+            </if>
+            <if test="bitrate != null">
+                bitrate,
+            </if>
+            <if test="shortCode != null">
+                short_code,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="productCode != null" >
+                #{productCode,jdbcType=VARCHAR},
+            </if>
+            <if test="imModule != null" >
+                #{imModule,jdbcType=VARCHAR},
+            </if>
+            <if test="imSendType != null" >
+                #{imSendType,jdbcType=TINYINT},
+            </if>
+            <if test="streamSupplier != null" >
+                #{streamSupplier,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="pushMode != null" >
+                #{pushMode,jdbcType=VARCHAR},
+            </if>
+            <if test="pullMode != null" >
+                #{pullMode,jdbcType=VARCHAR},
+            </if>
+            <if test="enterNotifySwitch != null" >
+                #{enterNotifySwitch,jdbcType=TINYINT},
+            </if>
+            <if test="checkAdmin != null" >
+                #{checkAdmin,jdbcType=TINYINT},
+            </if>
+            <if test="needReplay != null" >
+                #{needReplay,jdbcType=TINYINT},
+            </if>
+            <if test="clientType != null" >
+                #{clientType,jdbcType=TINYINT},
+            </if>
+            <if test="bitrate != null">
+                #{bitrate},
+            </if>
+            <if test="shortCode != null">
+                #{shortCode},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="cn.bixin.sona.server.room.domain.db.ProductConfig" >
+        update t_product_config
+        <set >
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null" >
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="imModule != null" >
+                im_module = #{imModule,jdbcType=VARCHAR},
+            </if>
+            <if test="imSendType != null" >
+                im_send_type = #{imSendType,jdbcType=TINYINT},
+            </if>
+
+            <if test="streamSupplier != null" >
+                stream_supplier = #{streamSupplier,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                type = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="pushMode != null" >
+                push_mode = #{pushMode,jdbcType=VARCHAR},
+            </if>
+            <if test="pullMode != null" >
+                pull_mode = #{pullMode,jdbcType=VARCHAR},
+            </if>
+            <if test="enterNotifySwitch != null" >
+                enter_notify_switch = #{enterNotifySwitch,jdbcType=TINYINT},
+            </if>
+            <if test="checkAdmin != null" >
+                check_admin = #{checkAdmin,jdbcType=TINYINT},
+            </if>
+            <if test="saveOnlineUser != null" >
+                save_online_user = #{saveOnlineUser,jdbcType=TINYINT},
+            </if>
+            <if test="needReplay != null" >
+                need_replay = #{needReplay,jdbcType=TINYINT},
+            </if>
+            <if test="clientType != null" >
+                client_type = #{clientType,jdbcType=TINYINT},
+            </if>
+            <if test="bitrate != null">
+                bitrate = ${bitrate}
+            </if>
+        </set>
+        where product_code = #{productCode,jdbcType=VARCHAR}
+    </update>
+</mapper>

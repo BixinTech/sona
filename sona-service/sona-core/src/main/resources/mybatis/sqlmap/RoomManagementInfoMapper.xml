@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.bixin.sona.server.room.mapper.RoomManagementInfoMapper">
+    <resultMap id="BaseResultMap" type="cn.bixin.sona.server.room.domain.db.RoomManagementInfo">
+        <result column="uid" jdbcType="VARCHAR" property="uid"/>
+        <result column="room_id" jdbcType="BIGINT" property="roomId"/>
+        <result column="status" jdbcType="BIT" property="status"/>
+        <result column="expire_time" jdbcType="TIMESTAMP" property="expireTime"/>
+        <result column="type" jdbcType="BIT" property="type"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        room_id, uid, type, status, expire_time
+    </sql>
+
+    <insert id="insertSelective" useGeneratedKeys="true" parameterType="cn.bixin.sona.server.room.domain.db.RoomManagementInfo">
+        insert into t_room_management_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="roomId != null">
+                room_id,
+            </if>
+            <if test="uid != null">
+                uid,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="expireTime != null">
+                expire_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="roomId != null">
+                #{roomId},
+            </if>
+            <if test="uid != null">
+                #{uid},
+            </if>
+            <if test="status != null">
+                #{status},
+            </if>
+            <if test="type != null">
+                #{type},
+            </if>
+            <if test="expireTime != null">
+                #{expireTime},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="invalid">
+        UPDATE t_room_management_info
+        set status = 0
+        WHERE room_id = #{roomId} and uid = #{targetUid} and type = #{type} and expire_time > NOW()
+    </update>
+
+    <update id="invalidType">
+        UPDATE t_room_management_info
+        set status = 0
+        WHERE room_id = #{roomId} and type = #{type} and expire_time > NOW()
+    </update>
+
+    <update id="valid">
+        UPDATE t_room_management_info
+        set status = 1
+        WHERE room_id = #{roomId} and uid = #{targetUid} and type = #{type} and expire_time > NOW()
+    </update>
+
+    <select id="getUserAllValidManagementInfo" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from t_room_management_info
+        where room_id = #{roomId} and uid = #{uid} and status = 1 and expire_time > NOW()
+    </select>
+
+    <select id="getUserManagementInfoBatch" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from t_room_management_info
+        where room_id = #{roomId} and status = 1 and expire_time > NOW() and uid in
+        <foreach close=")" collection="uidList" item="uid" open="(" separator=",">
+            #{uid}
+        </foreach>
+    </select>
+
+    <select id="isUserAdminOrOwner" parameterType="map" resultType="java.lang.Long">
+        select COUNT(1)
+        from t_room_management_info
+        where room_id = #{roomId} and uid = #{uid} and status = 1 and (type = 4 or type = 5) and expire_time > NOW()
+        limit 1
+    </select>
+
+    <select id="getUserManagementInfoByType" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from t_room_management_info
+        where room_id = #{roomId} and uid = #{uid} and status = 1 and type = #{type} and expire_time > NOW()
+        limit 1
+    </select>
+</mapper>

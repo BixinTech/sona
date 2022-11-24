@@ -1,0 +1,5 @@
+commonExecutor=cn.bixin.sona.common.dubbo.filter.CommonExecutorFilter
+hibernateValidation=cn.bixin.sona.common.dubbo.filter.HibernateValidationFilter
+exceptionFilter=cn.bixin.sona.common.dubbo.filter.ExceptionFilter
+providerTraceFilter=cn.bixin.sona.common.dubbo.filter.ProviderTraceFilter
+consumerTraceFilter=cn.bixin.sona.common.dubbo.filter.ConsumerTraceFilter

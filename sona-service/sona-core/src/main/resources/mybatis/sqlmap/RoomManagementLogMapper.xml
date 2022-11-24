@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.bixin.sona.server.room.mapper.RoomManagementLogMapper">
+    <resultMap id="BaseResultMap" type="cn.bixin.sona.server.room.domain.db.RoomManagementLog">
+        <result column="target_uid" jdbcType="VARCHAR" property="uid" />
+        <result column="room_id" jdbcType="BIGINT" property="roomId" />
+        <result column="type" jdbcType="BIT" property="type" />
+        <result column="operate" jdbcType="BIT" property="operate" />
+        <result column="operator" jdbcType="VARCHAR" property="operator" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        room_id, target_uid, type, operte, operator
+    </sql>
+
+    <insert id="insertSelective" useGeneratedKeys="true" parameterType="cn.bixin.sona.server.room.domain.db.RoomManagementLog">
+        insert into t_room_management_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="roomId != null">
+                room_id,
+            </if>
+            <if test="uid != null">
+                target_uid,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="operate != null">
+                operate,
+            </if>
+            <if test="operator != null">
+                operator,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="roomId != null">
+                #{roomId},
+            </if>
+            <if test="uid != null">
+                #{uid},
+            </if>
+            <if test="type != null">
+                #{type},
+            </if>
+            <if test="operate != null">
+                #{operate},
+            </if>
+            <if test="operator != null">
+                #{operator},
+            </if>
+        </trim>
+    </insert>
+
+</mapper>

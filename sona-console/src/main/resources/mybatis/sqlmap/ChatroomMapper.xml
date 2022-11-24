@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.bixin.sona.console.mapper.ChatroomMapper">
+  <resultMap id="BaseResultMap" type="cn.bixin.sona.console.domain.db.Chatroom">
+    <!--@mbg.generated-->
+    <!--@Table t_chatroom-->
+    <id column="pid" jdbcType="BIGINT" property="pid" />
+    <result column="id" jdbcType="CHAR" property="id" />
+    <result column="user_id" jdbcType="CHAR" property="userId" />
+    <result column="room_title" jdbcType="VARCHAR" property="roomTitle" />
+    <result column="room_tag" jdbcType="VARCHAR" property="roomTag" />
+    <result column="city_name" jdbcType="VARCHAR" property="cityName" />
+    <result column="templet" jdbcType="BOOLEAN" property="templet" />
+    <result column="chat_room_id" jdbcType="INTEGER" property="chatRoomId" />
+    <result column="status" jdbcType="BOOLEAN" property="status" />
+    <result column="room_no" jdbcType="INTEGER" property="roomNo" />
+    <result column="brand_name" jdbcType="VARCHAR" property="brandName" />
+    <result column="has_theme_border" jdbcType="BOOLEAN" property="hasThemeBorder" />
+    <result column="people_limit" jdbcType="INTEGER" property="peopleLimit" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_timestamp" jdbcType="TIMESTAMP" property="updateTimestamp" />
+    <result column="app_id" jdbcType="INTEGER" property="appId" />
+    <result column="token" jdbcType="VARCHAR" property="token" />
+    <result column="accId" jdbcType="VARCHAR" property="accid" />
+    <result column="show_type" jdbcType="INTEGER" property="showType" />
+    <result column="uid" jdbcType="BIGINT" property="uid" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="remote_chatroom_id" jdbcType="VARCHAR" property="remoteChatroomId" />
+    <result column="sona_room_id" jdbcType="BIGINT" property="sonaRoomId" />
+    <result column="pattern_id" jdbcType="INTEGER" property="patternId" />
+    <result column="room_type" jdbcType="INTEGER" property="roomType" />
+    <result column="source_id" jdbcType="INTEGER" property="sourceId" />
+    <result column="platform" jdbcType="VARCHAR" property="platform" />
+    <result column="function_code" jdbcType="VARCHAR" property="functionCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    pid, id, user_id, room_title, room_tag, city_name, templet, chat_room_id, `status`, 
+    room_no, brand_name, has_theme_border, people_limit, create_time, update_timestamp, 
+    app_id, token, accId, show_type, `uid`, `password`, remote_chatroom_id, sona_room_id, 
+    pattern_id, room_type, source_id, platform, function_code
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from t_chatroom
+    where pid = #{pid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from t_chatroom
+    where pid = #{pid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="pid" keyProperty="pid" parameterType="cn.bixin.sona.console.domain.db.Chatroom" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into t_chatroom (id, user_id, room_title, 
+      room_tag, city_name, templet, 
+      chat_room_id, `status`, room_no, 
+      brand_name, has_theme_border, people_limit, 
+      create_time, update_timestamp, app_id, 
+      token, accId, show_type, 
+      `uid`, `password`, remote_chatroom_id, 
+      sona_room_id, pattern_id, room_type, 
+      source_id, platform, function_code
+      )
+    values (#{id,jdbcType=CHAR}, #{userId,jdbcType=CHAR}, #{roomTitle,jdbcType=VARCHAR}, 
+      #{roomTag,jdbcType=VARCHAR}, #{cityName,jdbcType=VARCHAR}, #{templet,jdbcType=BOOLEAN}, 
+      #{chatRoomId,jdbcType=INTEGER}, #{status,jdbcType=BOOLEAN}, #{roomNo,jdbcType=INTEGER}, 
+      #{brandName,jdbcType=VARCHAR}, #{hasThemeBorder,jdbcType=BOOLEAN}, #{peopleLimit,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTimestamp,jdbcType=TIMESTAMP}, #{appId,jdbcType=INTEGER}, 
+      #{token,jdbcType=VARCHAR}, #{accid,jdbcType=VARCHAR}, #{showType,jdbcType=INTEGER}, 
+      #{uid,jdbcType=BIGINT}, #{password,jdbcType=VARCHAR}, #{remoteChatroomId,jdbcType=VARCHAR}, 
+      #{sonaRoomId,jdbcType=BIGINT}, #{patternId,jdbcType=INTEGER}, #{roomType,jdbcType=INTEGER}, 
+      #{sourceId,jdbcType=INTEGER}, #{platform,jdbcType=VARCHAR}, #{functionCode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="pid" keyProperty="pid" parameterType="cn.bixin.sona.console.domain.db.Chatroom" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into t_chatroom
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="roomTitle != null">
+        room_title,
+      </if>
+      <if test="roomTag != null">
+        room_tag,
+      </if>
+      <if test="cityName != null">
+        city_name,
+      </if>
+      <if test="templet != null">
+        templet,
+      </if>
+      <if test="chatRoomId != null">
+        chat_room_id,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="roomNo != null">
+        room_no,
+      </if>
+      <if test="brandName != null">
+        brand_name,
+      </if>
+      <if test="hasThemeBorder != null">
+        has_theme_border,
+      </if>
+      <if test="peopleLimit != null">
+        people_limit,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTimestamp != null">
+        update_timestamp,
+      </if>
+      <if test="appId != null">
+        app_id,
+      </if>
+      <if test="token != null">
+        token,
+      </if>
+      <if test="accid != null">
+        accId,
+      </if>
+      <if test="showType != null">
+        show_type,
+      </if>
+      <if test="uid != null">
+        `uid`,
+      </if>
+      <if test="password != null">
+        `password`,
+      </if>
+      <if test="remoteChatroomId != null">
+        remote_chatroom_id,
+      </if>
+      <if test="sonaRoomId != null">
+        sona_room_id,
+      </if>
+      <if test="patternId != null">
+        pattern_id,
+      </if>
+      <if test="roomType != null">
+        room_type,
+      </if>
+      <if test="sourceId != null">
+        source_id,
+      </if>
+      <if test="platform != null">
+        platform,
+      </if>
+      <if test="functionCode != null">
+        function_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=CHAR},
+      </if>
+      <if test="roomTitle != null">
+        #{roomTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="roomTag != null">
+        #{roomTag,jdbcType=VARCHAR},
+      </if>
+      <if test="cityName != null">
+        #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="templet != null">
+        #{templet,jdbcType=BOOLEAN},
+      </if>
+      <if test="chatRoomId != null">
+        #{chatRoomId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=BOOLEAN},
+      </if>
+      <if test="roomNo != null">
+        #{roomNo,jdbcType=INTEGER},
+      </if>
+      <if test="brandName != null">
+        #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="hasThemeBorder != null">
+        #{hasThemeBorder,jdbcType=BOOLEAN},
+      </if>
+      <if test="peopleLimit != null">
+        #{peopleLimit,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTimestamp != null">
+        #{updateTimestamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="appId != null">
+        #{appId,jdbcType=INTEGER},
+      </if>
+      <if test="token != null">
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="accid != null">
+        #{accid,jdbcType=VARCHAR},
+      </if>
+      <if test="showType != null">
+        #{showType,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="remoteChatroomId != null">
+        #{remoteChatroomId,jdbcType=VARCHAR},
+      </if>
+      <if test="sonaRoomId != null">
+        #{sonaRoomId,jdbcType=BIGINT},
+      </if>
+      <if test="patternId != null">
+        #{patternId,jdbcType=INTEGER},
+      </if>
+      <if test="roomType != null">
+        #{roomType,jdbcType=INTEGER},
+      </if>
+      <if test="sourceId != null">
+        #{sourceId,jdbcType=INTEGER},
+      </if>
+      <if test="platform != null">
+        #{platform,jdbcType=VARCHAR},
+      </if>
+      <if test="functionCode != null">
+        #{functionCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.bixin.sona.console.domain.db.Chatroom">
+    <!--@mbg.generated-->
+    update t_chatroom
+    <set>
+      <if test="id != null">
+        id = #{id,jdbcType=CHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=CHAR},
+      </if>
+      <if test="roomTitle != null">
+        room_title = #{roomTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="roomTag != null">
+        room_tag = #{roomTag,jdbcType=VARCHAR},
+      </if>
+      <if test="cityName != null">
+        city_name = #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="templet != null">
+        templet = #{templet,jdbcType=BOOLEAN},
+      </if>
+      <if test="chatRoomId != null">
+        chat_room_id = #{chatRoomId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=BOOLEAN},
+      </if>
+      <if test="roomNo != null">
+        room_no = #{roomNo,jdbcType=INTEGER},
+      </if>
+      <if test="brandName != null">
+        brand_name = #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="hasThemeBorder != null">
+        has_theme_border = #{hasThemeBorder,jdbcType=BOOLEAN},
+      </if>
+      <if test="peopleLimit != null">
+        people_limit = #{peopleLimit,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTimestamp != null">
+        update_timestamp = #{updateTimestamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="appId != null">
+        app_id = #{appId,jdbcType=INTEGER},
+      </if>
+      <if test="token != null">
+        token = #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="accid != null">
+        accId = #{accid,jdbcType=VARCHAR},
+      </if>
+      <if test="showType != null">
+        show_type = #{showType,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        `uid` = #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="password != null">
+        `password` = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="remoteChatroomId != null">
+        remote_chatroom_id = #{remoteChatroomId,jdbcType=VARCHAR},
+      </if>
+      <if test="sonaRoomId != null">
+        sona_room_id = #{sonaRoomId,jdbcType=BIGINT},
+      </if>
+      <if test="patternId != null">
+        pattern_id = #{patternId,jdbcType=INTEGER},
+      </if>
+      <if test="roomType != null">
+        room_type = #{roomType,jdbcType=INTEGER},
+      </if>
+      <if test="sourceId != null">
+        source_id = #{sourceId,jdbcType=INTEGER},
+      </if>
+      <if test="platform != null">
+        platform = #{platform,jdbcType=VARCHAR},
+      </if>
+      <if test="functionCode != null">
+        function_code = #{functionCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pid = #{pid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.bixin.sona.console.domain.db.Chatroom">
+    <!--@mbg.generated-->
+    update t_chatroom
+    set id = #{id,jdbcType=CHAR},
+      user_id = #{userId,jdbcType=CHAR},
+      room_title = #{roomTitle,jdbcType=VARCHAR},
+      room_tag = #{roomTag,jdbcType=VARCHAR},
+      city_name = #{cityName,jdbcType=VARCHAR},
+      templet = #{templet,jdbcType=BOOLEAN},
+      chat_room_id = #{chatRoomId,jdbcType=INTEGER},
+      `status` = #{status,jdbcType=BOOLEAN},
+      room_no = #{roomNo,jdbcType=INTEGER},
+      brand_name = #{brandName,jdbcType=VARCHAR},
+      has_theme_border = #{hasThemeBorder,jdbcType=BOOLEAN},
+      people_limit = #{peopleLimit,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_timestamp = #{updateTimestamp,jdbcType=TIMESTAMP},
+      app_id = #{appId,jdbcType=INTEGER},
+      token = #{token,jdbcType=VARCHAR},
+      accId = #{accid,jdbcType=VARCHAR},
+      show_type = #{showType,jdbcType=INTEGER},
+      `uid` = #{uid,jdbcType=BIGINT},
+      `password` = #{password,jdbcType=VARCHAR},
+      remote_chatroom_id = #{remoteChatroomId,jdbcType=VARCHAR},
+      sona_room_id = #{sonaRoomId,jdbcType=BIGINT},
+      pattern_id = #{patternId,jdbcType=INTEGER},
+      room_type = #{roomType,jdbcType=INTEGER},
+      source_id = #{sourceId,jdbcType=INTEGER},
+      platform = #{platform,jdbcType=VARCHAR},
+      function_code = #{functionCode,jdbcType=VARCHAR}
+    where pid = #{pid,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.bixin.sona.console.mapper.StreamMapper">
+
+    <resultMap id="BaseResultMap" type="cn.bixin.sona.console.domain.db.Stream">
+
+        <result column="product_code" property="productCode"/>
+        <result column="stream_id" property="streamId"/>
+        <result column="room_id" jdbcType="BIGINT" property="roomId"/>
+        <result column="status" property="status"/>
+        <result column="uid" property="uid"/>
+        <result column="source" property="source"/>
+        <result column="rtmp_url" property="rtmpUrl"/>
+        <result column="hls_url" property="hlsUrl"/>
+        <result column="hdl_url" property="hdlUrl"/>
+        <result column="pic_url" property="picUrl"/>
+        <result column="replay_url" property="replayUrl"/>
+        <result column="close_time" property="closeTime"/>
+        <result column="begin_time" property="beginTime"/>
+        <result column="end_time" property="endTime"/>
+        <result column="close_type" property="closeType"/>
+        <result column="err_msg" property="errMsg"/>
+        <result column="ext" property="ext"/>
+        <result column="id" property="id"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        product_code, stream_id, room_id, status, uid, source, rtmp_url, hls_url, hdl_url, replay_url, close_time, begin_time, end_time, close_type, err_msg, ext, id
+    </sql>
+
+    <select id="selectStream" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_room_stream
+        <where>
+            <if test="anchor != null">
+                AND id &lt; #{anchor}
+            </if>
+            <if test="streamId != null">
+                AND stream_id = #{streamId}
+            </if>
+            <if test="uid != null">
+                AND uid = #{uid}
+            </if>
+            <if test="roomId != null">
+                AND room_id = #{roomId}
+            </if>
+            <if test="startTime != null">
+                AND create_time >= #{startTime}
+            </if>
+            <if test="endTime != null">
+                AND create_time &lt;= #{endTime}
+            </if>
+        </where>
+        order by id desc limit #{limit}
+    </select>
+    <select id="selectStreamInfo" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_room_stream
+        <where>
+            <if test="streamId != null">
+                AND stream_id = #{streamId}
+            </if>
+            <if test="uid != null">
+                AND uid = #{uid}
+            </if>
+            <if test="roomId != null">
+                AND room_id = #{roomId}
+            </if>
+            <if test="startTime != null">
+                AND create_time >= #{startTime}
+            </if>
+            <if test="endTime != null">
+                AND create_time &lt;= #{endTime}
+            </if>
+        </where>
+    </select>
+
+
+</mapper>

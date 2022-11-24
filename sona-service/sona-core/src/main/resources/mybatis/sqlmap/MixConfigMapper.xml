@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.bixin.sona.server.room.mapper.MixConfigMapper">
+
+    <resultMap id="BaseResultMap" type="cn.bixin.sona.server.room.domain.db.MixConfig">
+        <result column="id" property="id"/>
+        <result column="room_id" property="roomId"/>
+        <result column="uid" property="uid"/>
+        <result column="width" property="width"/>
+        <result column="height" property="height"/>
+        <result column="tops" property="tops"/>
+        <result column="bottom" property="bottom"/>
+        <result column="lefts" property="lefts"/>
+        <result column="rights" property="rights"/>
+        <result column="bitrate" property="bitrate"/>
+        <result column="fps" property="fps"/>
+        <result column="status" property="status"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+                id,
+                room_id,
+                uid,
+                width,
+                height,
+                tops,
+                bottom,
+                lefts,
+                rights,
+                bitrate,
+                fps,
+                status,
+                create_time,
+                update_time
+    </sql>
+
+    <insert id="insertOrUpdate" useGeneratedKeys="true" keyProperty="id"
+            parameterType="cn.bixin.sona.server.room.domain.db.MixConfig">
+        insert into t_mix_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="roomId != null">
+                room_id,
+            </if>
+            <if test="uid != null">
+                uid,
+            </if>
+            <if test="width != null">
+                width,
+            </if>
+            <if test="height != null">
+                height,
+            </if>
+            <if test="tops != null">
+                tops,
+            </if>
+            <if test="bottom != null">
+                bottom,
+            </if>
+            <if test="lefts != null">
+                lefts,
+            </if>
+            <if test="rights != null">
+                rights,
+            </if>
+            <if test="bitrate != null">
+                bitrate,
+            </if>
+            <if test="fps != null">
+                fps,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="roomId != null">
+                #{roomId},
+            </if>
+            <if test="uid != null">
+                #{uid},
+            </if>
+            <if test="width != null">
+                #{width},
+            </if>
+            <if test="height != null">
+                #{height},
+            </if>
+            <if test="tops != null">
+                #{tops},
+            </if>
+            <if test="bottom != null">
+                #{bottom},
+            </if>
+            <if test="lefts != null">
+                #{lefts},
+            </if>
+            <if test="rights != null">
+                #{rights},
+            </if>
+            <if test="bitrate != null">
+                #{bitrate},
+            </if>
+            <if test="fps != null">
+                #{fps},
+            </if>
+            <if test="status != null">
+                #{status},
+            </if>
+        </trim>
+        ON DUPLICATE KEY UPDATE
+        uid = VALUES(uid),
+        width = VALUES(width),
+        height = VALUES(height),
+        tops = VALUES(tops),
+        bottom = VALUES(bottom),
+        lefts = VALUES(lefts),
+        rights = VALUES(rights),
+        bitrate = VALUES(bitrate),
+        fps = VALUES(fps),
+        status = VALUES(status)
+    </insert>
+
+    <update id="updateMixConfig">
+        update t_mix_config
+        <set>
+            <if test="uid != null">
+                uid = #{uid},
+            </if>
+            <if test="width != null">
+                width = #{width},
+            </if>
+            <if test="height != null">
+                height = #{height},
+            </if>
+            <if test="tops != null">
+                tops = #{tops},
+            </if>
+            <if test="bottom != null">
+                bottom = #{bottom},
+            </if>
+            <if test="lefts != null">
+                lefts = #{lefts},
+            </if>
+            <if test="rights != null">
+                rights = #{rights},
+            </if>
+            <if test="bitrate != null">
+                bitrate = #{bitrate},
+            </if>
+            <if test="fps != null">
+                fps = #{fps},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+        </set>
+        where room_id = #{roomId}
+    </update>
+
+    <select id="getMixConfigByRoomId" resultType="cn.bixin.sona.server.room.domain.db.MixConfig">
+        select
+        <include refid="Base_Column_List"/>
+        from t_mix_config where room_id = #{roomId}
+    </select>
+
+
+</mapper>

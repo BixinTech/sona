@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.bixin.sona.server.room.mapper.RoomGroupMemberMapper">
+    <resultMap id="BaseResultMap" type="cn.bixin.sona.server.room.domain.db.GroupMember" >
+        <result column="id" property="id" />
+        <result column="room_id" property="roomId" />
+        <result column="product_code" property="productCode" />
+        <result column="status" property="status" />
+        <result column="uid" property="uid" />
+        <result column="acc_id" property="accId" />
+        <result column="app_id" property="appId" />
+    </resultMap>
+
+    <resultMap id="GroupUserCountMap" type="cn.bixin.sona.server.room.domain.db.GroupUserCount" >
+        <result column="room_id" property="roomId"/>
+        <result column="count" property="count"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, product_code, room_id, status, uid
+    </sql>
+
+    <insert id="insertSelective" useGeneratedKeys="true" keyColumn="id" keyProperty="id" parameterType="cn.bixin.sona.server.room.domain.db.GroupMember">
+        INSERT INTO t_room_group_member
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test ='null != roomId'>
+                room_id,
+            </if>
+            <if test="productCode != null">
+                product_code,
+            </if>
+            <if test ='null != status'>
+                status,
+            </if>
+            <if test ='null != uid'>
+                uid,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test ='null != roomId'>
+                #{roomId},
+            </if>
+            <if test="productCode != null">
+                #{productCode},
+            </if>
+            <if test ='null != status'>
+                #{status},
+            </if>
+            <if test ='null != uid'>
+                #{uid},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="selectByRoomIdAndUid" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_room_group_member
+        WHERE room_id = #{roomId} and uid = #{uid} and status = 1
+        order by id limit 1
+    </select>
+
+    <update id="updateStatusLeave">
+        UPDATE t_room_group_member
+        SET status = 0
+        WHERE room_id = #{roomId} and uid = #{uid}
+    </update>
+
+    <update id="disbandMember">
+        UPDATE t_room_group_member
+        SET status = 0
+        WHERE room_id = #{roomId}
+    </update>
+
+    <select id="selectGroupMemberCountByRoomId" resultType="java.lang.Integer">
+        SELECT count(1)
+        FROM t_room_group_member
+        WHERE room_id = #{roomId} and status = 1
+    </select>
+
+<!--    <select id="selectGroupMemberByRoomIds" resultMap="BaseResultMap">-->
+<!--        SELECT-->
+<!--        <include refid="Base_Column_List"/>-->
+<!--        FROM t_room_group_member-->
+<!--        WHERE room_id in-->
+<!--        <foreach close=")" collection="roomIds" item="roomId" open="(" separator=",">-->
+<!--            #{roomId}-->
+<!--        </foreach>-->
+<!--        and status = 1-->
+<!--    </select>-->
+
+    <select id="selectGroupUserCountByRoomIds" resultMap="GroupUserCountMap">
+        SELECT room_id, COUNT(1) as count
+        FROM t_room_group_member
+        WHERE room_id in
+        <foreach close=")" collection="roomIds" item="roomId" open="(" separator=",">
+            #{roomId}
+        </foreach>
+        and status = 1
+        GROUP BY room_id
+    </select>
+
+    <select id="selectGroupMemberListByRoomId" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_room_group_member
+        WHERE room_id = #{roomId} and status = 1 and id > #{anchor}
+        limit #{limit}
+    </select>
+
+    <select id="selectByRoomIdAndUids" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_room_group_member
+        WHERE room_id = #{roomId} and uid in
+        <foreach close=")" collection="uids" item="uid" open="(" separator=",">
+            #{uid}
+        </foreach>
+        and status = 1
+    </select>
+
+</mapper>
