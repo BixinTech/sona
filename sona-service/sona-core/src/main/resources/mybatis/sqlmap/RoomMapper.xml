@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.bixin.sona.server.room.mapper.RoomMapper">
+    <resultMap id="BaseResultMap" type="cn.bixin.sona.server.room.domain.db.Room">
+        <result column="room_id" jdbcType="BIGINT" property="roomId" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="status" jdbcType="BIT" property="status" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="uid" jdbcType="BIGINT" property="uid" />
+        <result column="product_code" jdbcType="VARCHAR" property="productCode" />
+        <result column="im_module" jdbcType="VARCHAR" property="imModule" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="ext" jdbcType="VARCHAR" property="ext" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        room_id, name, status, password, uid, product_code, im_module, create_time, update_time, ext
+    </sql>
+
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="cn.bixin.sona.server.room.domain.db.Room">
+        insert into t_room
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="roomId != null">
+                room_id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="uid != null">
+                uid,
+            </if>
+            <if test="productCode != null">
+                product_code,
+            </if>
+            <if test="imModule != null">
+                im_module,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="ext != null">
+                ext,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="roomId != null">
+                #{roomId,jdbcType=BIGINT},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=BIT},
+            </if>
+            <if test="uid != null">
+                #{uid},
+            </if>
+            <if test="productCode != null">
+                #{productCode},
+            </if>
+            <if test="imModule != null">
+                #{imModule},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="ext != null">
+                #{ext,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="getRoomByRoomId" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_room
+        WHERE room_id = #{roomId}
+    </select>
+
+    <select id="getRoomsByRoomIds" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_room
+        WHERE room_id in
+        <foreach close=")" collection="roomIds" item="roomId" open="(" separator=",">
+            #{roomId}
+        </foreach>
+    </select>
+
+    <update id="openRoom" parameterType="map">
+        update t_room
+        set status = 1
+        where room_id = #{roomId}
+    </update>
+
+    <update id="closeRoom" parameterType="map">
+        update t_room
+        set status = 0, password = ''
+        where room_id = #{roomId}
+    </update>
+
+    <update id="updatePassword" parameterType="map">
+        update t_room
+        set password = #{password}
+        where room_id = #{roomId}
+    </update>
+
+    <select id="selectOnlineRoomList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_room
+        WHERE status = 1 and room_id > #{anchor}
+        order by room_id asc
+        limit #{limit}
+    </select>
+
+    <select id="countOnlineRoomList" resultType="java.lang.Integer">
+        SELECT
+        count(*)
+        FROM t_room
+        WHERE status = 1
+    </select>
+</mapper>

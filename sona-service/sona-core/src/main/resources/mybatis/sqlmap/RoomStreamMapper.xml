@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.bixin.sona.server.room.mapper.StreamMapper">
+    <resultMap id="BaseResultMap" type="cn.bixin.sona.server.room.domain.db.Stream">
+        <result column="product_code" property="productCode"/>
+        <result column="stream_id" property="streamId"/>
+        <result column="room_id" property="roomId"/>
+        <result column="status" property="status"/>
+        <result column="uid" property="uid"/>
+        <result column="source" property="source"/>
+        <result column="rtmp_url" property="rtmpUrl"/>
+        <result column="hls_url" property="hlsUrl"/>
+        <result column="hdl_url" property="hdlUrl"/>
+        <result column="pic_url" property="picUrl"/>
+        <result column="replay_url" property="replayUrl"/>
+        <result column="close_time" property="closeTime"/>
+        <result column="begin_time" property="beginTime"/>
+        <result column="end_time" property="endTime"/>
+        <result column="close_type" property="closeType"/>
+        <result column="err_msg" property="errMsg"/>
+        <result column="ext" property="ext"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        product_code, stream_id, room_id, status, uid, source, rtmp_url, hls_url, hdl_url, replay_url, close_time, begin_time, end_time, close_type, err_msg, ext
+    </sql>
+
+    <insert id="initStream">
+        INSERT INTO t_room_stream(stream_id, room_id, uid, product_code, source, status)
+        VALUES (#{streamId}, #{roomId}, #{uid}, #{productCode}, #{source}, -1)
+    </insert>
+
+    <insert id="addStream">
+        INSERT INTO t_room_stream(stream_id, room_id, uid, product_code, source, status)
+        VALUES (#{streamId}, #{roomId}, #{uid}, #{productCode}, #{source}, #{status})
+    </insert>
+
+    <select id="selectLivingStreamByRoomIdAndUids" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_room_stream
+        where room_id = #{roomId} and status = 1 and uid in
+        <foreach close=")" collection="uids" item="uid" open="(" separator=",">
+            #{uid}
+        </foreach>
+    </select>
+
+    <select id="getRoomLivingSteamList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_room_stream
+        WHERE room_id = #{roomId} and status = 1
+    </select>
+
+    <update id="updateCreateStream">
+        update t_room_stream
+        <set>
+            status = 1,
+            <if test="rtmpUrls!=null ">
+                rtmp_url = #{rtmpUrls},
+            </if>
+            <if test="hlsUrls!=null">
+                hls_url = #{hlsUrls},
+            </if>
+            <if test="hdlUrls!=null">
+                hdl_url = #{hdlUrls},
+            </if>
+            <if test="picUrls!=null">
+                pic_url = #{picUrls}
+            </if>
+        </set>
+        where stream_id = #{streamId}
+    </update>
+
+    <update id="openStream">
+        UPDATE t_room_stream
+        SET
+            status = 1
+        WHERE stream_id = #{streamId}
+    </update>
+
+    <update id="closeStream">
+        UPDATE t_room_stream
+        SET
+            status = 0,
+            close_time = current_time,
+            close_type = #{closeType},
+            err_msg = #{errMsg}
+        WHERE stream_id = #{streamId}
+    </update>
+
+    <update id="closeStreams">
+        UPDATE t_room_stream
+        SET
+        status = 0,
+        close_time = current_time,
+        close_type = 1
+        WHERE stream_id in
+        <foreach close=")" collection="streamIds" item="streamId" open="(" separator=",">
+            #{streamId}
+        </foreach>
+    </update>
+
+    <update id="handleReplay">
+        UPDATE t_room_stream
+        SET
+            begin_time = #{beginTime},
+            end_time = #{endTime},
+            replay_url = #{replayUrl}
+        WHERE stream_id = #{streamId}
+    </update>
+
+    <select id="selectByStreamId" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_room_stream
+        WHERE stream_id = #{streamId}
+    </select>
+
+    <insert id="insert" parameterType="cn.bixin.sona.server.room.domain.db.Stream">
+        INSERT INTO t_room_stream
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test='null != streamId'>
+                stream_id,
+            </if>
+            <if test='null != roomId'>
+                room_id,
+            </if>
+            <if test='null != status'>
+                status,
+            </if>
+            <if test='null != uid'>
+                uid,
+            </if>
+            <if test='null != source'>
+                source,
+            </if>
+            <if test='null != rtmpUrl'>
+                rtmp_url,
+            </if>
+            <if test='null != hlsUrl'>
+                hls_url,
+            </if>
+            <if test='null != hdlUrl'>
+                hdl_url,
+            </if>
+            <if test='null != picUrl'>
+                pic_url,
+            </if>
+            <if test='null != replayUrl'>
+                replay_url,
+            </if>
+            <if test='null != closeTime'>
+                close_time,
+            </if>
+            <if test='null != beginTime'>
+                begin_time,
+            </if>
+            <if test='null != endTime'>
+                end_time,
+            </if>
+            <if test='null != closeType'>
+                close_type,
+            </if>
+            <if test='null != errMsg'>
+                err_msg,
+            </if>
+            <if test='null != productCode'>
+                product_code,
+            </if>
+            <if test='null != ext'>
+                ext,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test='null != streamId'>
+                #{streamId},
+            </if>
+            <if test='null != roomId'>
+                #{roomId},
+            </if>
+            <if test='null != status'>
+                #{status},
+            </if>
+            <if test='null != uid'>
+                #{uid},
+            </if>
+            <if test='null != source'>
+                #{source},
+            </if>
+            <if test='null != rtmpUrl'>
+                #{rtmpUrl},
+            </if>
+            <if test='null != hlsUrl'>
+                #{hlsUrl},
+            </if>
+            <if test='null != hdlUrl'>
+                #{hdlUrl},
+            </if>
+            <if test='null != picUrl'>
+                #{picUrl},
+            </if>
+            <if test='null != replayUrl'>
+                #{replayUrl},
+            </if>
+            <if test='null != closeTime'>
+                #{closeTime},
+            </if>
+            <if test='null != beginTime'>
+                #{beginTime},
+            </if>
+            <if test='null != endTime'>
+                #{endTime},
+            </if>
+            <if test='null != closeType'>
+                #{closeType},
+            </if>
+            <if test='null != errMsg'>
+                #{errMsg},
+            </if>
+            <if test='null != productCode'>
+                #{productCode},
+            </if>
+            <if test='null != ext'>
+                #{ext},
+            </if>
+        </trim>
+    </insert>
+</mapper>

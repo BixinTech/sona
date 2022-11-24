@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yupaopao.room.base.mapper.MixStreamMapper" >
+  <resultMap id="BaseResultMap" type="cn.bixin.sona.server.room.domain.db.MixStream" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="room_id" property="roomId" jdbcType="BIGINT" />
+    <result column="biz_room_id" property="bizRoomId" jdbcType="VARCHAR" />
+    <result column="stream_id" property="streamId" jdbcType="VARCHAR" />
+    <result column="source" property="source" jdbcType="TINYINT" />
+    <result column="rtmp_url" property="rtmpUrl" jdbcType="VARCHAR" />
+    <result column="hls_url" property="hlsUrl" jdbcType="VARCHAR" />
+    <result column="hdl_url" property="hdlUrl" jdbcType="VARCHAR" />
+    <result column="input_stream" property="inputStream" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="begin_time" property="beginTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, room_id, biz_room_id, stream_id, source, rtmp_url, hls_url, hdl_url, input_stream, 
+    status, begin_time, end_time, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_mix_stream
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_mix_stream
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.bixin.sona.server.room.domain.db.MixStream" >
+    insert into t_mix_stream (id, room_id, biz_room_id, 
+      stream_id, source, rtmp_url, 
+      hls_url, hdl_url, input_stream, 
+      status, begin_time, end_time, 
+      create_time, update_time)
+    values (#{id,jdbcType=BIGINT}, #{roomId,jdbcType=BIGINT}, #{bizRoomId,jdbcType=VARCHAR}, 
+      #{streamId,jdbcType=VARCHAR}, #{source,jdbcType=TINYINT}, #{rtmpUrl,jdbcType=VARCHAR}, 
+      #{hlsUrl,jdbcType=VARCHAR}, #{hdlUrl,jdbcType=VARCHAR}, #{inputStream,jdbcType=VARCHAR}, 
+      #{status,jdbcType=TINYINT}, #{beginTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.bixin.sona.server.room.domain.db.MixStream" >
+    insert into t_mix_stream
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="roomId != null" >
+        room_id,
+      </if>
+      <if test="bizRoomId != null" >
+        biz_room_id,
+      </if>
+      <if test="streamId != null" >
+        stream_id,
+      </if>
+      <if test="source != null" >
+        source,
+      </if>
+      <if test="rtmpUrl != null" >
+        rtmp_url,
+      </if>
+      <if test="hlsUrl != null" >
+        hls_url,
+      </if>
+      <if test="hdlUrl != null" >
+        hdl_url,
+      </if>
+      <if test="inputStream != null" >
+        input_stream,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="beginTime != null" >
+        begin_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="roomId != null" >
+        #{roomId,jdbcType=BIGINT},
+      </if>
+      <if test="bizRoomId != null" >
+        #{bizRoomId,jdbcType=VARCHAR},
+      </if>
+      <if test="streamId != null" >
+        #{streamId,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=TINYINT},
+      </if>
+      <if test="rtmpUrl != null" >
+        #{rtmpUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="hlsUrl != null" >
+        #{hlsUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="hdlUrl != null" >
+        #{hdlUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="inputStream != null" >
+        #{inputStream,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="beginTime != null" >
+        #{beginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.bixin.sona.server.room.domain.db.MixStream" >
+    update t_mix_stream
+    <set >
+      <if test="roomId != null" >
+        room_id = #{roomId,jdbcType=BIGINT},
+      </if>
+      <if test="bizRoomId != null" >
+        biz_room_id = #{bizRoomId,jdbcType=VARCHAR},
+      </if>
+      <if test="streamId != null" >
+        stream_id = #{streamId,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        source = #{source,jdbcType=TINYINT},
+      </if>
+      <if test="rtmpUrl != null" >
+        rtmp_url = #{rtmpUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="hlsUrl != null" >
+        hls_url = #{hlsUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="hdlUrl != null" >
+        hdl_url = #{hdlUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="inputStream != null" >
+        input_stream = #{inputStream,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="beginTime != null" >
+        begin_time = #{beginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.bixin.sona.server.room.domain.db.MixStream" >
+    update t_mix_stream
+    set room_id = #{roomId,jdbcType=BIGINT},
+      biz_room_id = #{bizRoomId,jdbcType=VARCHAR},
+      stream_id = #{streamId,jdbcType=VARCHAR},
+      source = #{source,jdbcType=TINYINT},
+      rtmp_url = #{rtmpUrl,jdbcType=VARCHAR},
+      hls_url = #{hlsUrl,jdbcType=VARCHAR},
+      hdl_url = #{hdlUrl,jdbcType=VARCHAR},
+      input_stream = #{inputStream,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      begin_time = #{beginTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <update id="stopMixStream">
+      update t_mix_stream
+      set status = 0,
+      end_time = #{endTime,jdbcType=TIMESTAMP}
+    where stream_id = #{streamId,jdbcType=VARCHAR}
+    and end_time &lt;= #{endTime,jdbcType=TIMESTAMP}
+    and status = 1
+    and source = #{source,jdbcType=TINYINT}
+    </update>
+
+  <select id="findLatestByStreamId" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from t_mix_stream
+    where stream_id = #{streamId,jdbcType=VARCHAR}
+    and source = #{source,jdbcType=TINYINT}
+    order by create_time desc limit 1
+  </select>
+</mapper>

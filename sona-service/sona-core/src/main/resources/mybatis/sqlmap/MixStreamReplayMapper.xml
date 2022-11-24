@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yupaopao.room.base.mapper.MixStreamReplayMapper" >
+  <resultMap id="BaseResultMap" type="cn.bixin.sona.server.room.domain.db.MixStreamReplay" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="room_id" property="roomId" jdbcType="BIGINT" />
+    <result column="biz_room_id" property="bizRoomId" jdbcType="VARCHAR" />
+    <result column="stream_id" property="streamId" jdbcType="VARCHAR" />
+    <result column="source" property="source" jdbcType="TINYINT" />
+    <result column="replay_url" property="replayUrl" jdbcType="VARCHAR" />
+    <result column="begin_time" property="beginTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, room_id, biz_room_id, stream_id, source, replay_url, begin_time, end_time, create_time, update_time
+  </sql>
+  <insert id="insert" parameterType="cn.bixin.sona.server.room.domain.db.MixStreamReplay" >
+    insert into t_mix_stream_replay (room_id, biz_room_id, stream_id, source, replay_url, begin_time, end_time)
+    values (#{roomId}, #{bizRoomId}, #{streamId}, #{source}, #{replayUrl}, #{beginTime}, #{endTime})
+  </insert>
+
+  <select id="findMixStreamReplayByRoomId" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from t_mix_stream_replay
+    where biz_room_id = #{bizRoomId}
+    and end_time > #{beginTime} and begin_time &lt; #{endTime}
+    order by id asc
+    limit #{start}, #{limit}
+  </select>
+  <select id="findCountMixStreamReplayByRoomId" resultType="java.lang.Long">
+    select count(1) from t_mix_stream_replay
+    where biz_room_id = #{bizRoomId}
+    and end_time > #{beginTime} and begin_time &lt; #{endTime}
+  </select>
+</mapper>

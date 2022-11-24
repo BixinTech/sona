@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.bixin.sona.console.mapper.SwitchDetailMapper">
+  <resultMap id="BaseResultMap" type="cn.bixin.sona.console.domain.db.SwitchDetail">
+    <!--@mbg.generated-->
+    <!--@Table t_switch_detail-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="batch_id" jdbcType="BIGINT" property="batchId" />
+    <result column="room_id" jdbcType="BIGINT" property="roomId" />
+    <result column="stream_supplier" jdbcType="VARCHAR" property="streamSupplier" />
+    <result column="pull_mode" jdbcType="VARCHAR" property="pullMode" />
+    <result column="status" jdbcType="BOOLEAN" property="status" />
+    <result column="operator" jdbcType="VARCHAR" property="operator" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, batch_id, room_id, stream_supplier, pull_mode, `status`, `operator`, create_time, 
+    update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from t_switch_detail
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from t_switch_detail
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="cn.bixin.sona.console.domain.db.SwitchDetail" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into t_switch_detail (batch_id, room_id, stream_supplier, 
+      pull_mode, `status`, `operator`, 
+      create_time, update_time)
+    values (#{batchId,jdbcType=BIGINT}, #{roomId,jdbcType=BIGINT}, #{streamSupplier,jdbcType=VARCHAR}, 
+      #{pullMode,jdbcType=VARCHAR}, #{status,jdbcType=BOOLEAN}, #{operator,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="cn.bixin.sona.console.domain.db.SwitchDetail" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into t_switch_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="batchId != null">
+        batch_id,
+      </if>
+      <if test="roomId != null">
+        room_id,
+      </if>
+      <if test="streamSupplier != null">
+        stream_supplier,
+      </if>
+      <if test="pullMode != null">
+        pull_mode,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="operator != null">
+        `operator`,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="batchId != null">
+        #{batchId,jdbcType=BIGINT},
+      </if>
+      <if test="roomId != null">
+        #{roomId,jdbcType=BIGINT},
+      </if>
+      <if test="streamSupplier != null">
+        #{streamSupplier,jdbcType=VARCHAR},
+      </if>
+      <if test="pullMode != null">
+        #{pullMode,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=BOOLEAN},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.bixin.sona.console.domain.db.SwitchDetail">
+    <!--@mbg.generated-->
+    update t_switch_detail
+    <set>
+      <if test="batchId != null">
+        batch_id = #{batchId,jdbcType=BIGINT},
+      </if>
+      <if test="roomId != null">
+        room_id = #{roomId,jdbcType=BIGINT},
+      </if>
+      <if test="streamSupplier != null">
+        stream_supplier = #{streamSupplier,jdbcType=VARCHAR},
+      </if>
+      <if test="pullMode != null">
+        pull_mode = #{pullMode,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=BOOLEAN},
+      </if>
+      <if test="operator != null">
+        `operator` = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.bixin.sona.console.domain.db.SwitchDetail">
+    <!--@mbg.generated-->
+    update t_switch_detail
+    set batch_id = #{batchId,jdbcType=BIGINT},
+      room_id = #{roomId,jdbcType=BIGINT},
+      stream_supplier = #{streamSupplier,jdbcType=VARCHAR},
+      pull_mode = #{pullMode,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=BOOLEAN},
+      `operator` = #{operator,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+<!--auto generated by MybatisCodeHelper on 2022-11-07-->
+  <select id="selectAllByBatchIdIn" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_switch_detail
+        where batch_id in
+        <foreach item="item" index="index" collection="batchIdCollection"
+                 open="(" separator="," close=")">
+            #{item,jdbcType=BIGINT}
+        </foreach>
+    </select>
+</mapper>

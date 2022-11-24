@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.bixin.sona.console.mapper.SwitchBatchMapper">
+  <resultMap id="BaseResultMap" type="cn.bixin.sona.console.domain.db.SwitchBatch">
+    <!--@mbg.generated-->
+    <!--@Table t_switch_batch-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="switch_type" jdbcType="BOOLEAN" property="switchType" />
+    <result column="stream_supplier" jdbcType="VARCHAR" property="streamSupplier" />
+    <result column="pull_mode" jdbcType="VARCHAR" property="pullMode" />
+    <result column="file_url" jdbcType="VARCHAR" property="fileUrl" />
+    <result column="status" jdbcType="BOOLEAN" property="status" />
+    <result column="operator" jdbcType="VARCHAR" property="operator" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, switch_type, stream_supplier, pull_mode, file_url, `status`, `operator`, create_time, 
+    update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from t_switch_batch
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from t_switch_batch
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="cn.bixin.sona.console.domain.db.SwitchBatch" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into t_switch_batch (switch_type, stream_supplier, pull_mode, 
+      file_url, `status`, `operator`, 
+      create_time, update_time)
+    values (#{switchType,jdbcType=BOOLEAN}, #{streamSupplier,jdbcType=VARCHAR}, #{pullMode,jdbcType=VARCHAR}, 
+      #{fileUrl,jdbcType=VARCHAR}, #{status,jdbcType=BOOLEAN}, #{operator,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="cn.bixin.sona.console.domain.db.SwitchBatch" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into t_switch_batch
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="switchType != null">
+        switch_type,
+      </if>
+      <if test="streamSupplier != null">
+        stream_supplier,
+      </if>
+      <if test="pullMode != null">
+        pull_mode,
+      </if>
+      <if test="fileUrl != null">
+        file_url,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="operator != null">
+        `operator`,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="switchType != null">
+        #{switchType,jdbcType=BOOLEAN},
+      </if>
+      <if test="streamSupplier != null">
+        #{streamSupplier,jdbcType=VARCHAR},
+      </if>
+      <if test="pullMode != null">
+        #{pullMode,jdbcType=VARCHAR},
+      </if>
+      <if test="fileUrl != null">
+        #{fileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=BOOLEAN},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.bixin.sona.console.domain.db.SwitchBatch">
+    <!--@mbg.generated-->
+    update t_switch_batch
+    <set>
+      <if test="switchType != null">
+        switch_type = #{switchType,jdbcType=BOOLEAN},
+      </if>
+      <if test="streamSupplier != null">
+        stream_supplier = #{streamSupplier,jdbcType=VARCHAR},
+      </if>
+      <if test="pullMode != null">
+        pull_mode = #{pullMode,jdbcType=VARCHAR},
+      </if>
+      <if test="fileUrl != null">
+        file_url = #{fileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=BOOLEAN},
+      </if>
+      <if test="operator != null">
+        `operator` = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.bixin.sona.console.domain.db.SwitchBatch">
+    <!--@mbg.generated-->
+    update t_switch_batch
+    set switch_type = #{switchType,jdbcType=BOOLEAN},
+      stream_supplier = #{streamSupplier,jdbcType=VARCHAR},
+      pull_mode = #{pullMode,jdbcType=VARCHAR},
+      file_url = #{fileUrl,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=BOOLEAN},
+      `operator` = #{operator,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="queryByParam" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from t_switch_batch
+    where 1=1
+    order by create_time desc
+    limit #{start},#{pageSize}
+  </select>
+  <select id="queryTotalCount" resultType="java.lang.Integer">
+    select
+      count(*) count
+    from t_switch_batch where 1=1
+  </select>
+</mapper>

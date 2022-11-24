@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>cn.bixin</groupId>
+		<artifactId>sona</artifactId>
+		<version>${revision}</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+
+	<artifactId>sona-session</artifactId>
+	<packaging>pom</packaging>
+
+	<name>sona-session</name>
+	<description>sona session</description>
+
+	<modules>
+		<module>sona-session-core</module>
+		<module>sona-session-api</module>
+	</modules>
+
+</project>
