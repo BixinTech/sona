@@ -6,7 +6,7 @@ Sona 平台是一个搭建语音房产品的全端解决方案，包含了房间
 
 详细使用文档和设计可以查看 [wiki](https://github.com/BixinTech/sona-server/wiki)
 
-##SONA 架构
+## SONA 架构
 
 ![Architecture](https://github.com/BixinTech/sona-server/blob/v1.0/doc/Sona%20%E6%9E%B6%E6%9E%84.jpg?raw=true)
 
