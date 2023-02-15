@@ -26,6 +26,10 @@ Java 1.8 and Maven 3.6 are needed to build the master branch
 
 * Bugs: [Issues](https://github.com/BixinTech/sona-server/issues/new)
 
+* WeChat
+
+![WeChat](https://github.com/BixinTech/sona-server/blob/master/doc/WeChat.jpg?raw=true)
+
 ## Reporting bugs
 
 Please create [issues](https://github.com/BixinTech/sona-server/issues/new) for reporting any bugs or suggestions.
