@@ -1,6 +1,6 @@
 <img src="https://github.com/BixinTech/sona-server/blob/master/doc/sona_logo.png?raw=true">
 
-# sona-server
+# SONA
 
 ### SONA 简介
 - sona 是一个由比心语音技术团队开发，用于快速搭建语音房产品的全端解决方案，支撑了比心聊天室、直播、游戏房等业务。
