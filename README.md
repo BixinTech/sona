@@ -34,7 +34,7 @@
 
 ### 联系我们
 
-* 邮箱:  liuliming@bixin.cn, qinwei@bixin.cn
+* 邮箱:  liuliming@bixin.cn, qinweivae@gmail.com
 
 * Bugs: [Issues](https://github.com/BixinTech/sona-server/issues/new)
 
