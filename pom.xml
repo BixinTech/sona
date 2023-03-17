@@ -45,7 +45,7 @@
         <apollo.version>2.0.1</apollo.version>
         <rocketmq.version>2.2.1</rocketmq.version>
         <dubbo.version>2.7.8</dubbo.version>
-        <cat.version>0.0.7</cat.version>
+        <cat.version>3.0.0</cat.version>
         <hbase.version>2.0.0</hbase.version>
         <mybatis-spring-boot-starter.version>2.1.3</mybatis-spring-boot-starter.version>
         <eclipse-collections.version>10.4.0</eclipse-collections.version>
@@ -101,8 +101,8 @@
             </dependency>
 
             <dependency>
-                <groupId>net.dubboclub</groupId>
-                <artifactId>cat-monitor</artifactId>
+                <groupId>com.dianping.cat</groupId>
+                <artifactId>cat-client</artifactId>
                 <version>${cat.version}</version>
             </dependency>
 

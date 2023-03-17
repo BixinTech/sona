@@ -76,8 +76,8 @@
         </dependency>
 
         <dependency>
-            <groupId>net.dubboclub</groupId>
-            <artifactId>cat-monitor</artifactId>
+            <groupId>com.dianping.cat</groupId>
+            <artifactId>cat-client</artifactId>
             <scope>provided</scope>
         </dependency>
 
