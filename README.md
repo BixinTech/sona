@@ -31,8 +31,6 @@
 
 ### 产品体验
 - 产品主页 & 产品下载：https://bxyuer.com/
-- demo 下载
-<img src="https://github.com/BixinTech/sona-android/blob/main/doc/img.png?raw=true" width="50%">
 
 ### 联系我们
 
