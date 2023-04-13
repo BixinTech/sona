@@ -36,8 +36,6 @@
 
 * 邮箱:  liuliming@bixin.cn, qinweivae@gmail.com
 
-* Bugs: [Issues](https://github.com/BixinTech/sona-server/issues/new)
-
 * 微信交流群
 
 <img src="https://github.com/BixinTech/sona-server/blob/master/doc/WeChat.jpg?raw=true" width="50%">
