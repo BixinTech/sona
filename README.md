@@ -40,7 +40,7 @@
 
 * 微信交流群
 
-<img src="https://github.com/BixinTech/sona-server/blob/master/doc/WeChat.jpg?raw=true" width="50%">
+<img src="https://github.com/BixinTech/sona-server/blob/master/doc/wechat.png?raw=true" width="50%">
 
 ### Reporting bugs
 
