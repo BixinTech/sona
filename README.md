@@ -36,11 +36,7 @@
 
 ### 联系我们
 
-* 邮箱:  liuliming@bixin.cn, qinweivae@gmail.com
-
-* 微信交流群，加群备注sona
-
-<img src="https://github.com/BixinTech/sona-server/blob/master/doc/wx.png?raw=true" width="50%">
+* 邮箱:  wenlei@bixin.cn, qinweivae@gmail.com
 
 ### Reporting bugs
 
